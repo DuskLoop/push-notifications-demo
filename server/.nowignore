@@ -1,0 +1,5 @@
+server/generated
+server/src
+server/datamodel.graphql
+server/graphqlgen.yml
+server/tsconfig.json

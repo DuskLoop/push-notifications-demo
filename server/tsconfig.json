@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist"
+  }
+}

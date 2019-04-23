@@ -1,0 +1,8 @@
+endpoint: https://my-prisma-server-6370487401.herokuapp.com/
+datamodel: datamodel.graphql
+generate:
+  - generator: typescript-client
+    output: ./generated/prisma-client/
+hooks:
+  post-deploy:
+    - prisma generate
