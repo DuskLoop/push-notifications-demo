@@ -1,0 +1,7 @@
+mutation saveSubscription($userId: ID!, $subscription: JSON!) {
+  saveSubscription(userId: $userId, subscription: $subscription) {
+    id
+    name
+    subscriptions
+  }
+}

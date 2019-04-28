@@ -1,12 +1,17 @@
+scalar JSON
+scalar JSONObject
+
 type Query {
   users: [User!]!
 }
 
 type Mutation {
   createUser(name: String!): User
+  saveSubscription(userId: ID!, subscription: JSON!): User!
 }
 
 type User {
   id: ID!
   name: String!
+  subscriptions: [JSON!]!
 }

@@ -27,7 +27,8 @@ export namespace QueryResolvers {
 export namespace UserResolvers {
   export const defaultResolvers = {
     id: (parent: User) => parent.id,
-    name: (parent: User) => parent.name
+    name: (parent: User) => parent.name,
+    subscriptions: (parent: User) => parent.subscriptions
   };
 
   export type IdResolver = (
@@ -44,6 +45,13 @@ export namespace UserResolvers {
     info: GraphQLResolveInfo
   ) => string | Promise<string>;
 
+  export type SubscriptionsResolver = (
+    parent: User,
+    args: {},
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => string[] | Promise<string[]>;
+
   export interface Type {
     id: (
       parent: User,
@@ -58,6 +66,13 @@ export namespace UserResolvers {
       ctx: Context,
       info: GraphQLResolveInfo
     ) => string | Promise<string>;
+
+    subscriptions: (
+      parent: User,
+      args: {},
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => string[] | Promise<string[]>;
   }
 }
 
@@ -68,12 +83,24 @@ export namespace MutationResolvers {
     name: string;
   }
 
+  export interface ArgsSaveSubscription {
+    userId: string;
+    subscription: string;
+  }
+
   export type CreateUserResolver = (
     parent: undefined,
     args: ArgsCreateUser,
     ctx: Context,
     info: GraphQLResolveInfo
   ) => User | null | Promise<User | null>;
+
+  export type SaveSubscriptionResolver = (
+    parent: undefined,
+    args: ArgsSaveSubscription,
+    ctx: Context,
+    info: GraphQLResolveInfo
+  ) => User | Promise<User>;
 
   export interface Type {
     createUser: (
@@ -82,6 +109,13 @@ export namespace MutationResolvers {
       ctx: Context,
       info: GraphQLResolveInfo
     ) => User | null | Promise<User | null>;
+
+    saveSubscription: (
+      parent: undefined,
+      args: ArgsSaveSubscription,
+      ctx: Context,
+      info: GraphQLResolveInfo
+    ) => User | Promise<User>;
   }
 }
 

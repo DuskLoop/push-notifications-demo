@@ -8,8 +8,13 @@ import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { Query } from "react-apollo";
 import { users } from "./__generated__/users";
+import {
+  saveSubscription,
+  saveSubscriptionVariables
+} from "./Mutations/__generated__/saveSubscription";
 
 const query = loader("./Query.graphql");
+const saveSubcriptionMutation = loader("./Mutations/saveSubscription.graphql");
 
 const client = new ApolloClient({
   link: ApolloLink.from([
@@ -23,7 +28,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: process.env.REACT_APP_SERVER_URI,
+      uri: `${process.env.REACT_APP_SERVER_URI}graphql`,
       credentials: "same-origin"
     })
   ]),
@@ -50,8 +55,27 @@ class App extends Component {
             }}
           </Query>
         </ul>
+        <button id="button">Hej</button>
       </ApolloProvider>
     );
+  }
+}
+
+export function updateSubscriptionOnServer(
+  subscription: PushSubscription | null
+) {
+  // TODO: Send subscription to application server
+
+  console.log("Subscription: ", JSON.stringify(subscription, null, 2));
+
+  if (subscription) {
+    client.mutate<saveSubscription, saveSubscriptionVariables>({
+      mutation: saveSubcriptionMutation,
+      variables: {
+        subscription: subscription,
+        userId: "cjryw0lfa00040861rzkody34"
+      }
+    });
   }
 }
 

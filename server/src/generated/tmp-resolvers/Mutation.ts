@@ -7,5 +7,8 @@ export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
   createUser: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
+  },
+  saveSubscription: (parent, args, ctx) => {
+    throw new Error("Resolver not implemented");
   }
 };
